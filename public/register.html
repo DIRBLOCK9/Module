@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>Register</title></head>
+<link rel="stylesheet" href="styles.css">
+<body>
+  <form onsubmit="register(event)">
+    <input type="email" id="email" required placeholder="Email">
+    <input type="password" id="password" required placeholder="Password">
+    <button type="submit">Register</button>
+  </form>
+  <script>
+    async function register(e) {
+      e.preventDefault();
+      const res = await fetch('/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value
+        })
+      });
+      if (res.ok) alert('Перевірте пошту для підтвердження');
+      else alert('Помилка реєстрації');
+    }
+  </script>
+</body>
+</html>
